@@ -59,4 +59,20 @@ typedef struct add_instr{
   uint32_t zeros2 : 7;
 }add_instr;
 
+typedef struct mul_instr{
+  mul_instr()
+  {
+    inst = 0b0110011;
+    zeros1 = 0;
+    one1 = 0000001;
+  }
+
+  uint32_t inst : 7;
+  uint32_t rd : 5;
+  uint32_t zeros1 : 3;
+  uint32_t rs1 : 5;
+  uint32_t rs2 : 5;
+  uint32_t one1 : 7;
+}mul_instr;
+
 #endif

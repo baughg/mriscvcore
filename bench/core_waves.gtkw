@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
-[*] Sat May 19 11:37:42 2018
+[*] Sat May 19 11:48:06 2018
 [*]
 [dumpfile] "/home/gary/RTL/mRISCV/bench/mriscvcore/Vmriscvcore.vcd"
-[dumpfile_mtime] "Sat May 19 11:36:09 2018"
-[dumpfile_size] 42932
+[dumpfile_mtime] "Sat May 19 11:47:52 2018"
+[dumpfile_size] 40869
 [savefile] "/home/gary/RTL/mRISCV/bench/core_waves.gtkw"
 [timestart] 0
 [size] 2495 1576
 [pos] -1 -1
-*-4.302089 12 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-4.302089 38 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] TOP.
 [treeopen] TOP.mriscvcore.
 [treeopen] TOP.mriscvcore.ALU_inst.
@@ -22,16 +22,24 @@
 -CORE
 @28
 TOP.mriscvcore.clk
-@420
+@421
 TOP.mriscvcore.timestamp[63:0]
 @22
 TOP.ARdata[31:0]
 @28
 TOP.ARprot[2:0]
-@29
+@200
+-External
+@28
 TOP.ARready
+TOP.Rvalid
+@22
+TOP.Rdata[31:0]
+@200
+-Output
 @28
 TOP.ARvalid
+TOP.RReady
 @22
 TOP.AWdata[31:0]
 @28
@@ -40,11 +48,6 @@ TOP.AWready
 TOP.AWvalid
 TOP.Bready
 TOP.Bvalid
-TOP.RReady
-@22
-TOP.Rdata[31:0]
-@28
-TOP.Rvalid
 @22
 TOP.Wdata[31:0]
 @28

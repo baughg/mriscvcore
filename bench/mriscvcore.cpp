@@ -49,9 +49,11 @@ int main(int argc, char** argv)
     uint32_t instr = 0;
     lui_instr lui_i;
     add_instr add_i;
+    mul_instr mul_i;
+
     std::deque<uint32_t> instructions;
     lui_i.rd = 1;
-    lui_i.imm = 0x45;
+    lui_i.imm = 0x1;
     instr = *((uint32_t*)&lui_i);
     instructions.push_back(instr);
     lui_i.rd = 2;
@@ -63,7 +65,11 @@ int main(int argc, char** argv)
     add_i.rs2 = 2;
     instr = *((uint32_t*)&add_i);
     instructions.push_back(instr);
-
+    mul_i.rd = 4;
+    mul_i.rs1 = 1;
+    mul_i.rs2 = 2;
+    instr = *((uint32_t*)&mul_i);
+    instructions.push_back(instr);
 
     while (!Verilated::gotFinish())
     {
@@ -157,7 +163,7 @@ int main(int argc, char** argv)
 
         main_time++;            // Time passes...
 
-        if(cycle > 32)
+        if(cycle > 128)
            break;      
     }
 
