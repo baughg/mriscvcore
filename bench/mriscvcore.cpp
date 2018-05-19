@@ -53,7 +53,7 @@ int main(int argc, char** argv)
     {
         uut->clk = uut->clk ? 0 : 1;       // Toggle clock
         pos_edge = uut->clk == 1;
-
+        uut->eval();
         if(pos_edge)
           cycle++;
 
