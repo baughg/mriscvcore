@@ -43,4 +43,20 @@ typedef struct lui_instr{
   uint32_t imm : 20;
 }lui_instr;
 
+typedef struct add_instr{
+  add_instr()
+  {
+    inst = 0b0110011;
+    zeros1 = 0;
+    zeros2 = 0;
+  }
+
+  uint32_t inst : 7;
+  uint32_t rd : 5;
+  uint32_t zeros1 : 3;
+  uint32_t rs1 : 5;
+  uint32_t rs2 : 5;
+  uint32_t zeros2 : 7;
+}add_instr;
+
 #endif

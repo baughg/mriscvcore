@@ -47,6 +47,7 @@ int main(int argc, char** argv)
     bool pos_edge = false;
     uint32_t instr = 0;
     lui_instr lui_i;
+    add_instr add_i;
 
     while (!Verilated::gotFinish())
     {
@@ -70,11 +71,9 @@ int main(int argc, char** argv)
             break;
             case 5:
             uut->ARready = 1;
-            break;
-            case 6:
             uut->Rvalid = 1;
             break;
-
+            
             case 10:
             lui_i.rd = 2;
             lui_i.imm = 0x67;
@@ -88,12 +87,27 @@ int main(int argc, char** argv)
             uut->Rvalid = 1;
             break;
 
+            case 17:
+            add_i.rd = 3;
+            add_i.rs1 = 1;
+            add_i.rs2 = 2;
+
+            instr = *((uint32_t*)&add_i);
+            uut->Rdata = instr;
+            break;
+            case 18:
+            uut->ARready = 1;
+            break;
+            case 19:
+            uut->Rvalid = 1;
+            break;
+
             default:
             uut->ARready = 0;
             uut->Rvalid = 0;
             break;
         }
-        
+
         uut->timestamp = cycle;
         uut->eval();            // Evaluate model
 
