@@ -162,6 +162,23 @@ int main(int argc, char** argv)
             uut->Rvalid = 0;
         }
 
+        if(pos_edge)
+        {
+            if(uut->AWvalid && uut->Wvalid)
+            {
+                mem_model.write(uut->AWdata,uut->Wdata);
+                uut->AWready = 1;
+                uut->Wready = 1;
+                uut->Bvalid = 1;
+                printf("%05llu Write address: 0x%.8X [0x%.8X]\n",cycle,uut->AWdata, uut->Wdata);
+            }
+            else
+            {
+                uut->AWready = uut->Wvalid;
+                uut->Wready = uut->Wvalid;
+                uut->Bvalid = uut->Wvalid;
+            }
+        }
         
         uut->timestamp = cycle;
         uut->eval();            // Evaluate model

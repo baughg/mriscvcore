@@ -27,7 +27,7 @@ bool MemoryModel::load(const std::string &filename)
     fread(&end_address_,sizeof(start_address_),1,mem_file);
     fread(&entry_address_,sizeof(entry_address_),1,mem_file);
     fread(&mem_size,sizeof(mem_size),1,mem_file);
-    memory_.resize(mem_size);
+    memory_.resize(mem_size << 2);
     fread(&memory_[0],1,mem_size,mem_file);
     p_memory_ = (uint8_t*)&memory_[0];
     fclose(mem_file);
@@ -47,4 +47,15 @@ void MemoryModel::read(uint32_t address, uint32_t &data)
   }
 
   data = *((uint32_t*)&p_memory_[address]);
+}
+
+void MemoryModel::write(uint32_t address, const uint32_t data)
+{
+  address += entry_address_;
+
+  if(!p_memory_ || address > end_address_) {    
+    return;
+  }
+
+  *((uint32_t*)&p_memory_[address]) = data;
 }
