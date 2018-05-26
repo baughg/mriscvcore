@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
-[*] Sat May 26 12:17:26 2018
+[*] Sat May 26 13:37:19 2018
 [*]
 [dumpfile] "/home/gary/RTL/mRISCV/bench/mriscvcore/Vmriscvcore.vcd"
-[dumpfile_mtime] "Sat May 26 12:03:34 2018"
-[dumpfile_size] 66207
+[dumpfile_mtime] "Sat May 26 13:37:10 2018"
+[dumpfile_size] 67221
 [savefile] "/home/gary/RTL/mRISCV/bench/core_waves.gtkw"
 [timestart] 0
 [size] 2495 1576
 [pos] -1 -1
-*-4.302089 84 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-4.302089 86 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] TOP.
 [treeopen] TOP.mriscvcore.
 [treeopen] TOP.mriscvcore.ALU_inst.
@@ -71,9 +71,7 @@ TOP.trap
 TOP.mriscvcore.enable_exec
 TOP.mriscvcore.enable_exec_mem
 TOP.mriscvcore.enable_mul
-@29
 TOP.mriscvcore.done_exec
-@28
 TOP.mriscvcore.is_inst_mul
 TOP.mriscvcore.done_mul
 @22
@@ -264,7 +262,9 @@ TOP.mriscvcore.REG_FILE_inst.MEM_FILE.ram(0)[31:0]
 TOP.mriscvcore.REG_FILE_inst.MEM_FILE.ram(1)[31:0]
 TOP.mriscvcore.REG_FILE_inst.MEM_FILE.ram(2)[31:0]
 TOP.mriscvcore.REG_FILE_inst.MEM_FILE.ram(3)[31:0]
+@23
 TOP.mriscvcore.REG_FILE_inst.MEM_FILE.ram(4)[31:0]
+@22
 TOP.mriscvcore.REG_FILE_inst.MEM_FILE.ram(5)[31:0]
 TOP.mriscvcore.REG_FILE_inst.MEM_FILE.ram(6)[31:0]
 TOP.mriscvcore.REG_FILE_inst.MEM_FILE.ram(7)[31:0]

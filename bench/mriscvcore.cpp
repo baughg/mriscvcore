@@ -3,6 +3,8 @@
 
 #include "verilated_vcd_c.h"
 #include "mriscvcore.h"
+#include "memory_model.h"
+
 #include <iostream>
 #include <string>
 #include <cstdlib>
@@ -70,6 +72,13 @@ int main(int argc, char** argv)
     mul_i.rs2 = 2;
     instr = *((uint32_t*)&mul_i);
     instructions.push_back(instr);
+    instr = 0xfe010113;
+    instructions.push_back(instr);
+    instr = 0x0000e197;
+    instructions.push_back(instr);
+    MemoryModel mem_model;
+
+    mem_model.load("flat_memory.bin");
 
     while (!Verilated::gotFinish())
     {
@@ -132,14 +141,15 @@ int main(int argc, char** argv)
         if(cycle > 5 && pos_edge && instructions.size())
         {
             instr = instructions.front();
-            instructions.pop_front();
-
+            //instructions.pop_front();
+            
             if(uut->ARvalid && uut->RReady)
             {
+                mem_model.read(uut->ARdata,instr);
                 uut->ARready = 1;
                 uut->Rvalid = 1;
                 uut->Rdata = instr;
-                printf("%05llu Read address: 0x%.8X\n",cycle,uut->ARdata);
+                printf("%05llu Read address: 0x%.8X [0x%.8X]\n",cycle,uut->ARdata, instr);
             }
             else {
                 uut->ARready = uut->RReady;
