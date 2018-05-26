@@ -53,7 +53,7 @@ int main(int argc, char** argv)
 
     std::deque<uint32_t> instructions;
     lui_i.rd = 1;
-    lui_i.imm = 0x1;
+    lui_i.imm = 0x34;
     instr = *((uint32_t*)&lui_i);
     instructions.push_back(instr);
     lui_i.rd = 2;

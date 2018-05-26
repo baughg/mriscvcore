@@ -1,15 +1,15 @@
 [*]
 [*] GTKWave Analyzer v3.3.66 (w)1999-2015 BSI
-[*] Sat May 19 11:48:06 2018
+[*] Sat May 26 12:17:26 2018
 [*]
 [dumpfile] "/home/gary/RTL/mRISCV/bench/mriscvcore/Vmriscvcore.vcd"
-[dumpfile_mtime] "Sat May 19 11:47:52 2018"
-[dumpfile_size] 40869
+[dumpfile_mtime] "Sat May 26 12:03:34 2018"
+[dumpfile_size] 66207
 [savefile] "/home/gary/RTL/mRISCV/bench/core_waves.gtkw"
 [timestart] 0
 [size] 2495 1576
 [pos] -1 -1
-*-4.302089 38 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+*-4.302089 84 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
 [treeopen] TOP.
 [treeopen] TOP.mriscvcore.
 [treeopen] TOP.mriscvcore.ALU_inst.
@@ -22,7 +22,7 @@
 -CORE
 @28
 TOP.mriscvcore.clk
-@421
+@420
 TOP.mriscvcore.timestamp[63:0]
 @22
 TOP.ARdata[31:0]
@@ -60,12 +60,27 @@ TOP.clk
 @22
 TOP.inirr[31:0]
 TOP.outirr[31:0]
+TOP.mriscvcore.rd[31:0]
+TOP.mriscvcore.rdi[4:0]
 @28
 TOP.rstn
 @22
 TOP.timestamp[63:0]
 @28
 TOP.trap
+TOP.mriscvcore.enable_exec
+TOP.mriscvcore.enable_exec_mem
+TOP.mriscvcore.enable_mul
+@29
+TOP.mriscvcore.done_exec
+@28
+TOP.mriscvcore.is_inst_mul
+TOP.mriscvcore.done_mul
+@22
+TOP.mriscvcore.rd[31:0]
+TOP.mriscvcore.rdi[4:0]
+@28
+TOP.mriscvcore.rdw_rsrn
 @200
 -MEMORY_INTERFACE
 @28
@@ -226,6 +241,11 @@ TOP.mriscvcore.REG_FILE_inst.rd[31:0]
 TOP.mriscvcore.REG_FILE_inst.rdi[4:0]
 @28
 TOP.mriscvcore.REG_FILE_inst.rdw_rsrn
+TOP.mriscvcore.done_exec
+TOP.mriscvcore.done_mem
+TOP.mriscvcore.done_mul
+TOP.mriscvcore.enable_exec
+TOP.mriscvcore.enable_exec_mem
 @22
 TOP.mriscvcore.REG_FILE_inst.rs1[31:0]
 TOP.mriscvcore.REG_FILE_inst.rs1i[4:0]
@@ -275,5 +295,68 @@ TOP.mriscvcore.REG_FILE_inst.MEM_FILE.ram(31)[31:0]
 @28
 TOP.mriscvcore.REG_FILE_inst.MEM_FILE.rst
 TOP.mriscvcore.REG_FILE_inst.MEM_FILE.we_a
+@200
+-MULT
+@22
+TOP.mriscvcore.MULT_inst.BITS_BOOTH[31:0]
+TOP.mriscvcore.MULT_inst.COUNT_BIT[31:0]
+@28
+TOP.mriscvcore.MULT_inst.Enable
+TOP.mriscvcore.MULT_inst.EnableMul
+@22
+TOP.mriscvcore.MULT_inst.M1[17:0]
+TOP.mriscvcore.MULT_inst.M2[17:0]
+TOP.mriscvcore.MULT_inst.NZ0[35:0]
+TOP.mriscvcore.MULT_inst.NZ2[35:0]
+TOP.mriscvcore.MULT_inst.Op[11:0]
+TOP.mriscvcore.MULT_inst.Out0[63:0]
+TOP.mriscvcore.MULT_inst.Out1[63:0]
+TOP.mriscvcore.MULT_inst.Out2[63:0]
+@28
+TOP.mriscvcore.MULT_inst.OutFSM1[2:0]
+TOP.mriscvcore.MULT_inst.OutFSM2[2:0]
+TOP.mriscvcore.MULT_inst.OutFSM3[2:0]
+@22
+TOP.mriscvcore.MULT_inst.Out[63:0]
+@28
+TOP.mriscvcore.MULT_inst.Ready
+@22
+TOP.mriscvcore.MULT_inst.X0[16:0]
+TOP.mriscvcore.MULT_inst.X1[16:0]
+TOP.mriscvcore.MULT_inst.Y0[16:0]
+TOP.mriscvcore.MULT_inst.Y1[16:0]
+TOP.mriscvcore.MULT_inst.Z0[33:0]
+TOP.mriscvcore.MULT_inst.Z1[35:0]
+TOP.mriscvcore.MULT_inst.Z1_Z2_Z0[35:0]
+TOP.mriscvcore.MULT_inst.Z2[33:0]
+@28
+TOP.mriscvcore.MULT_inst.clk
+@22
+TOP.mriscvcore.MULT_inst.codif[11:0]
+TOP.mriscvcore.MULT_inst.cont1[4:0]
+TOP.mriscvcore.MULT_inst.cont2[4:0]
+TOP.mriscvcore.MULT_inst.cont3[4:0]
+@28
+TOP.mriscvcore.MULT_inst.is_oper
+@22
+TOP.mriscvcore.MULT_inst.rd[31:0]
+@28
+TOP.mriscvcore.MULT_inst.Done
+@22
+TOP.mriscvcore.MULT_inst.rdu[63:0]
+@28
+TOP.mriscvcore.MULT_inst.reset
+@22
+TOP.mriscvcore.MULT_inst.rs1[31:0]
+TOP.mriscvcore.MULT_inst.rs2[31:0]
+@28
+TOP.mriscvcore.MULT_inst.sig
+TOP.mriscvcore.MULT_inst.signo
+@22
+TOP.mriscvcore.MULT_inst.srd[31:0]
+TOP.mriscvcore.MULT_inst.ss1[31:0]
+TOP.mriscvcore.MULT_inst.ss1_ss1[16:0]
+TOP.mriscvcore.MULT_inst.ss2[31:0]
+TOP.mriscvcore.MULT_inst.ss2_ss2[16:0]
 [pattern_trace] 1
 [pattern_trace] 0

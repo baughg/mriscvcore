@@ -246,6 +246,6 @@ FSM FSM_inst
     assign is_exec = ~(&(code));
     
     // Write to rd flag
-    assign rdw_rsrn = (is_rd_util | is_rd_alu | done_mul | (is_rd_mem & done_mem)) & (enable_exec | enable_exec_mem);
+    assign rdw_rsrn = ((is_rd_util | is_rd_alu | (is_rd_mem & done_mem)) & (enable_exec | enable_exec_mem)) | (done_mul & is_inst_mul);
 
 endmodule
