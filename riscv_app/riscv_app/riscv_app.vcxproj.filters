@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="elf">
+      <UniqueIdentifier>{f54b41b5-164a-465d-9fd8-f97f0eb99f3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common">
+      <UniqueIdentifier>{4c5ca26d-e452-4e48-a262-09c855245e8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="memory">
+      <UniqueIdentifier>{b99cb297-1ebe-4c54-aa07-925a57fd9e91}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="memory\flat_memory.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+    <ClInclude Include="memory\memory_model.h">
+      <Filter>memory</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="riscv_app.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="elf\elf_section_description.cpp">
+      <Filter>elf</Filter>
+    </ClCompile>
+    <ClCompile Include="elf\elf_string_table.cpp">
+      <Filter>elf</Filter>
+    </ClCompile>
+    <ClCompile Include="elf\elf32.cpp">
+      <Filter>elf</Filter>
+    </ClCompile>
+    <ClCompile Include="elf\elfbase.cpp">
+      <Filter>elf</Filter>
+    </ClCompile>
+    <ClCompile Include="common\defs.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\m2_model.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\elf_section.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
+    <ClCompile Include="memory\flat_memory.cpp">
+      <Filter>memory</Filter>
+    </ClCompile>
+    <ClCompile Include="memory\memory_model.cpp">
+      <Filter>memory</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
