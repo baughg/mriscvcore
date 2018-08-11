@@ -190,7 +190,7 @@ int main(int argc, char** argv)
 
         main_time++;            // Time passes...
 
-        if(cycle > 128)
+        if(cycle > 1024)
            break;      
     }
 
