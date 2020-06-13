@@ -12,6 +12,7 @@ public:
   bool load(const std::string &filename);
   void read(uint32_t address, uint32_t &data);
   void write(uint32_t address, const uint32_t data);
+  uint32_t get_entry_point();
 private:
   std::vector<uint32_t> memory_;
   uint8_t* p_memory_; 

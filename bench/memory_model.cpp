@@ -12,6 +12,11 @@ MemoryModel::~MemoryModel()
 {
 }
 
+uint32_t MemoryModel::get_entry_point()
+{
+  return entry_address_;
+}
+
 bool MemoryModel::load(const std::string &filename)
 {
   uint32_t mem_size = 0;
@@ -31,6 +36,8 @@ bool MemoryModel::load(const std::string &filename)
     fread(&memory_[0],1,mem_size,mem_file);
     p_memory_ = (uint8_t*)&memory_[0];
     fclose(mem_file);
+
+    printf("Entry: 0x%.8X\n",entry_address_);
     return true;
   }
 

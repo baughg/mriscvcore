@@ -79,7 +79,7 @@ int main(int argc, char** argv)
     MemoryModel mem_model;
 
     mem_model.load("flat_memory.bin");
-
+    uint32_t entry_address = mem_model.get_entry_point();
     while (!Verilated::gotFinish())
     {
         uut->clk = uut->clk ? 0 : 1;       // Toggle clock
@@ -149,7 +149,8 @@ int main(int argc, char** argv)
                 uut->ARready = 1;
                 uut->Rvalid = 1;
                 uut->Rdata = instr;
-                printf("%05llu Read address: 0x%.8X [0x%.8X]\n",cycle,uut->ARdata, instr);
+                printf("%05llu Read address: 0x%.8X [0x%.8X]\n",
+                cycle,uut->ARdata + entry_address, instr);
             }
             else {
                 uut->ARready = uut->RReady;
@@ -170,7 +171,8 @@ int main(int argc, char** argv)
                 uut->AWready = 1;
                 uut->Wready = 1;
                 uut->Bvalid = 1;
-                printf("%05llu Write address: 0x%.8X [0x%.8X]\n",cycle,uut->AWdata, uut->Wdata);
+                printf("%05llu Write address: 0x%.8X [0x%.8X]\n",
+                cycle,uut->AWdata + entry_address, uut->Wdata);
             }
             else
             {
@@ -190,7 +192,7 @@ int main(int argc, char** argv)
 
         main_time++;            // Time passes...
 
-        if(cycle > 1024)
+        if(cycle > 1000)
            break;      
     }
 
