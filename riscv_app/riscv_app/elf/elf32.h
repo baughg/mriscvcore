@@ -27,10 +27,22 @@ namespace elf {
 	} elf_header_middle_common;
 
 	typedef struct {
+		uint64_t e_entry;  /* Entry point address */
+		uint64_t e_phoff; /* Program header offset */
+		uint64_t e_shoff; /* Section header offset */
+	} elf_header_middle_common64;
+
+	typedef struct {
 		elf_header_top_common t;
 		elf_header_middle_common m;
 		elf_header_bottom_common b;
 	}elf32_header;
+
+	typedef struct {
+		elf_header_top_common t;
+		elf_header_middle_common64 m;
+		elf_header_bottom_common b;
+	}elf64_header;
 #pragma pack(pop)
 
 	// PT_LOOS to PT_HIOS (PT_LOPROC to PT_HIPROC) is an inclusive reserved ranges for 

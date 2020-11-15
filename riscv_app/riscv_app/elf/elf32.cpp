@@ -34,6 +34,7 @@ bool Elf32::read_header_from_file(std::string file_name)
 
 	fclose(elf_file);
 	elf_filename_ = file_name;
+	//return true;
 	return header_.t.ei_class == ELF32; // 1 for 32 bit
 }
 
