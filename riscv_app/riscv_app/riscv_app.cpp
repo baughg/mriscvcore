@@ -1,7 +1,8 @@
 // riscv_app.cpp : Defines the entry point for the console application.
 //
 
-#include "elf/elf32.h"
+//#include "elf/elf32.h"
+#include "elf/elfxIW.h"
 #include "common/elf_section.h"
 #include "memory/flat_memory.h"
 #include "memory/memory_model.h"
@@ -9,7 +10,7 @@
 
 int main(int argc, char** argv)
 {
-  elf::Elf32 elf;
+  elf::ElfxIW<uint32_t> elf;
 
   if(argc < 2)
   {

@@ -33,6 +33,15 @@
     <ClInclude Include="memory\memory_model.h">
       <Filter>memory</Filter>
     </ClInclude>
+    <ClInclude Include="elf\elfxIW.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="elf\elf64.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="elf\elfxIW.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="riscv_app.cpp">
@@ -64,6 +73,9 @@
     </ClCompile>
     <ClCompile Include="memory\memory_model.cpp">
       <Filter>memory</Filter>
+    </ClCompile>
+    <ClCompile Include="elf\elf64.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

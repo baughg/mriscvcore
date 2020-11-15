@@ -1,12 +1,13 @@
-#ifndef ELF32_H
-#define ELF32_H
+#pragma once
 #include "m2_model.h"
 #include "elfbase.h"
 #include "elf_string_table.h"
 #include "elf_section_description.h"
 #include <map>
-
+#include <cstdio>
+#include <algorithm>
 #include <vector>
+#include <string>
 
 namespace elf {
 #pragma pack(push)
@@ -77,61 +78,62 @@ namespace elf {
 
 #define IS_C_PLUS_PLUS 1
 
-  typedef struct function
-  {
-    function()
-    {
-      address = 0;
-      trap_handler = 0;
-      is_cplusplus = 0;
-      elf_function = 0;
+	typedef struct function
+	{
+		function()
+		{
+			address = 0;
+			trap_handler = 0;
+			is_cplusplus = 0;
+			elf_function = 0;
 			colour = 0;
-    }
+		}
 
-    std::string name;
+		std::string name;
 		std::string safe_name;
-    std::string mangled_name;
-    u32 address;
-    u16 trap_handler;
-    u16 is_cplusplus;
-    u32 elf_function;
+		std::string mangled_name;
+		u32 address;
+		u16 trap_handler;
+		u16 is_cplusplus;
+		u32 elf_function;
 		u32 colour;
-    std::map<function*, u32> parent_link;
-    std::map<function*, u32> child_link;
-  }function;
+		std::map<function*, u32> parent_link;
+		std::map<function*, u32> child_link;
+	}function;
 
-	class Elf32 : public ElfBase
+	template <class IW>
+	class ElfxIW : public ElfBase
 	{
 	public:
-    Elf32();
-		~Elf32();
+		ElfxIW();	
 		bool read_header_from_file(std::string file_name);
 		bool get_program_header();
 		bool get_section_header();
-    bool get_symbols();
+		bool get_symbols();
 		bool print_header_info();
-    u32 entry_address();
-    std::vector<ElfSectionDescription> &section_description();    
-    bool cmx_dma_section(u32 &addr, u32 &size);
-    void lookup_symbol(std::string variable);
-    std::deque<symbol_description*> &get_lookup_symbols();    
-		bool load_section(const u32 &address, u32 &load_size, elf::ElfSectionDescription &desc);
+		u32 entry_address();
+		std::vector<ElfSectionDescription> &section_description();
+		bool cmx_dma_section(IW &addr, u32 &size);
+		void lookup_symbol(std::string variable);
+		std::deque<symbol_description*> &get_lookup_symbols();
+		bool load_section(const IW &address, u32 &load_size, elf::ElfSectionDescription &desc);
 	private:
 		elf32_header header_;
-		elf_header_middle_common<uint32_t>* p_m_;
+		elf_header_middle_common<IW>* p_m_;
 		std::vector<elf32_program_header> program_headers_;
 		std::vector<elf32_section_header> section_headers_;
 		std::vector<ElfStringTable> string_tables_;
 		ElfStringTable* p_sh_str_tab_;
-    ElfStringTable* p_sh_symstr_tab_;
+		ElfStringTable* p_sh_symstr_tab_;
 		std::vector<ElfSectionDescription> section_description_;
-    ElfSectionDescription* p_symbol_section_;
-    ElfSectionDescription* p_cmx_dma_section_;
-    std::vector<elf32_symbol> symbols_;
-    std::vector<symbol_description> symbol_descriptions_;   
-    std::deque<std::string> lookup_symbols_;
-    std::deque<symbol_description*> lookup_symbol_descriptions_;   
+		ElfSectionDescription* p_symbol_section_;
+		ElfSectionDescription* p_cmx_dma_section_;
+		std::vector<elf32_symbol> symbols_;
+		std::vector<symbol_description> symbol_descriptions_;
+		std::deque<std::string> lookup_symbols_;
+		std::deque<symbol_description*> lookup_symbol_descriptions_;
 	};
 }
-#endif
+
+#include "elfxIW.hpp"
 
