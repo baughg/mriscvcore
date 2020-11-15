@@ -144,7 +144,6 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="elf\elf64.h" />
     <ClInclude Include="elf\elfxIW.h" />
     <ClInclude Include="elf\elfxIW.hpp" />
     <ClInclude Include="memory\flat_memory.h" />
@@ -154,8 +153,6 @@
     <ClCompile Include="common\defs.cpp" />
     <ClCompile Include="common\elf_section.cpp" />
     <ClCompile Include="common\m2_model.cpp" />
-    <ClCompile Include="elf\elf32.cpp" />
-    <ClCompile Include="elf\elf64.cpp" />
     <ClCompile Include="elf\elfbase.cpp" />
     <ClCompile Include="elf\elf_section_description.cpp" />
     <ClCompile Include="elf\elf_string_table.cpp" />

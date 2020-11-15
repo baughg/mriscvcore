@@ -36,9 +36,6 @@
     <ClInclude Include="elf\elfxIW.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="elf\elf64.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="elf\elfxIW.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -51,9 +48,6 @@
       <Filter>elf</Filter>
     </ClCompile>
     <ClCompile Include="elf\elf_string_table.cpp">
-      <Filter>elf</Filter>
-    </ClCompile>
-    <ClCompile Include="elf\elf32.cpp">
       <Filter>elf</Filter>
     </ClCompile>
     <ClCompile Include="elf\elfbase.cpp">
@@ -73,9 +67,6 @@
     </ClCompile>
     <ClCompile Include="memory\memory_model.cpp">
       <Filter>memory</Filter>
-    </ClCompile>
-    <ClCompile Include="elf\elf64.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

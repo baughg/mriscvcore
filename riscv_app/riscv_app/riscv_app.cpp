@@ -10,7 +10,8 @@
 
 int main(int argc, char** argv)
 {
-  elf::ElfxIW<uint32_t> elf;
+	using IW = uint64_t;
+  elf::ElfxIW<IW> elf;
 
   if(argc < 2)
   {
@@ -27,9 +28,9 @@ int main(int argc, char** argv)
     elf.get_symbols();
     u32 entry_address = elf.entry_address();
 
-    std::vector<elf::ElfSectionDescription> section_desc = elf.section_description();
-    std::vector<ElfSection> elf_sections;
-    FlatMemory memory;
+    std::vector<elf::ElfSectionDescription<IW>> section_desc = elf.section_description();
+    std::vector<ElfSection<IW>> elf_sections;
+    FlatMemory<IW> memory;
     memory.set_entry_address(entry_address);
     size_t sections = section_desc.size();
     u32 section_size = 0, section_address = 0, file_offset = 0;

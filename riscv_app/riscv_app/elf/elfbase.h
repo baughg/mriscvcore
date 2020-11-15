@@ -162,7 +162,8 @@ namespace elf {
     SHF_EXCLUDE = 0x8000000			    // Section is excluded unless referenced or allocated(Solaris)
   }section_flags;
 
-  typedef struct
+  template<typename T>
+  struct elf_section_header
   {
     u32 sh_name;				    /* An offset to a string in the.shstrtab section that represents the name of this section*/
 
@@ -170,7 +171,7 @@ namespace elf {
 
     u32 sh_flags;				    /* Identifies the attributes of the section.*/
 
-    u32 sh_addr; 				    /* Virtual address of the section in memory, for sections that are loaded.*/
+    T sh_addr; 				    /* Virtual address of the section in memory, for sections that are loaded.*/
 
     u32 sh_offset;				  /* Offset of the section in the file image. */
 
@@ -186,7 +187,7 @@ namespace elf {
 
     u32 sh_entsize;				  /* Contains the size, in bytes, of each entry, for sections that contain fixed - size
                             entries.Otherwise, this field contains zero. */
-  }elf32_section_header;
+  };
 
   typedef struct {
     u32 st_name;

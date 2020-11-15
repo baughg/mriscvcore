@@ -34,11 +34,12 @@ namespace elf {
 		uint64_t e_shoff; /* Section header offset */
 	} elf_header_middle_common64;
 
-	typedef struct {
+	template <typename T>
+	struct elf_header {
 		elf_header_top_common t;
-		elf_header_middle_common<uint32_t> m;
+		elf_header_middle_common<T> m;
 		elf_header_bottom_common b;
-	}elf32_header;
+	};
 
 	typedef struct {
 		elf_header_top_common t;
@@ -63,18 +64,19 @@ namespace elf {
 		PT_HIPROC = 0x7FFFFFFF
 	}program_type;
 
-	typedef struct
+	template <typename T>
+	struct elf_program_header
 	{
 		program_type p_type;	/* Identifies the type of the segment.*/
 		u32 p_offset;			/* Offset of the segment in the file image.*/
-		u32 p_vaddr;			/* Virtual address of the segment in memory.*/
-		u32 p_paddr;			/* On systems where physical address is relevant, reserved for segment's physical address.*/
+		T p_vaddr;			/* Virtual address of the segment in memory.*/
+		T p_paddr;			/* On systems where physical address is relevant, reserved for segment's physical address.*/
 		u32 p_filesz;			/* Size in bytes of the segment in the file image.May be 0.*/
 		u32 p_memsz;			/* Size in bytes of the segment in memory.May be 0.*/
 		u32 p_flags;			/* Segment - dependent flags.*/
 		u32 p_align;			/* 0 and 1 specify no alignment.Otherwise should be a positive, integral power of 2, with
 								p_vaddr equating p_offset modulus p_align.*/
-	}elf32_program_header;
+	};
 
 #define IS_C_PLUS_PLUS 1
 
@@ -111,23 +113,26 @@ namespace elf {
 		bool get_section_header();
 		bool get_symbols();
 		bool print_header_info();
-		u32 entry_address();
-		std::vector<ElfSectionDescription> &section_description();
+		IW entry_address();
+		std::vector<ElfSectionDescription<IW>> &section_description();
 		bool cmx_dma_section(IW &addr, u32 &size);
 		void lookup_symbol(std::string variable);
 		std::deque<symbol_description*> &get_lookup_symbols();
-		bool load_section(const IW &address, u32 &load_size, elf::ElfSectionDescription &desc);
+		bool load_section(const IW &address, u32 &load_size, elf::ElfSectionDescription<IW> &desc);
 	private:
-		elf32_header header_;
-		elf_header_middle_common<IW>* p_m_;
-		std::vector<elf32_program_header> program_headers_;
-		std::vector<elf32_section_header> section_headers_;
-		std::vector<ElfStringTable> string_tables_;
-		ElfStringTable* p_sh_str_tab_;
-		ElfStringTable* p_sh_symstr_tab_;
-		std::vector<ElfSectionDescription> section_description_;
-		ElfSectionDescription* p_symbol_section_;
-		ElfSectionDescription* p_cmx_dma_section_;
+		const u8 ei_class_{ sizeof(IW) == sizeof(uint32_t) ?
+			static_cast<u8>(elf::ELF32) : static_cast<u8>(elf::ELF64) };
+
+		elf_header<IW> header_;
+		elf_header_middle_common<IW>* p_m_{};
+		std::vector<elf_program_header<IW>> program_headers_;
+		std::vector<elf_section_header<IW>> section_headers_;
+		std::vector<ElfStringTable<IW>> string_tables_;
+		ElfStringTable<IW>* p_sh_str_tab_{};
+		ElfStringTable<IW>* p_sh_symstr_tab_{};
+		std::vector<ElfSectionDescription<IW>> section_description_;
+		ElfSectionDescription<IW>* p_symbol_section_{};
+		ElfSectionDescription<IW>* p_cmx_dma_section_{};
 		std::vector<elf32_symbol> symbols_;
 		std::vector<symbol_description> symbol_descriptions_;
 		std::deque<std::string> lookup_symbols_;

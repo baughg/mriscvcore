@@ -26,29 +26,28 @@ namespace elf {
 		fread(&header_, sizeof(header_), 1, elf_file);
 
 		fclose(elf_file);
-		elf_filename_ = file_name;
-		//return true;
-		return header_.t.ei_class == ELF32; // 1 for 32 bit
+		elf_filename_ = file_name;		
+		return header_.t.ei_class == ei_class_;
 	}
 
 	template <class IW>
 	bool ElfxIW<IW>::print_header_info()
 	{
-		if (header_.t.ei_class != ELF32)
+		if (header_.t.ei_class != ei_class_)
 			return false;
 
 		if (ElfBase::print_header_info())
 		{
-			printf("\nMemory address of the entry point - %#08x\n", p_m_->e_entry);
-			printf("Start of the program header table - %#08x\n", p_m_->e_phoff);
-			printf("Start of the section header table - %#08x\n", p_m_->e_shoff);
+			printf("\nMemory address of the entry point - %#016x\n", static_cast<uint64_t>(p_m_->e_entry));
+			printf("Start of the program header table - %#016x\n", static_cast<uint64_t>(p_m_->e_phoff));
+			printf("Start of the section header table - %#016x\n", static_cast<uint64_t>(p_m_->e_shoff));
 		}
 
 		return true;
 	}
 
 	template <class IW>
-	bool ElfxIW<IW>::load_section(const IW &address, u32 &load_size, elf::ElfSectionDescription &desc)
+	bool ElfxIW<IW>::load_section(const IW &address, u32 &load_size, elf::ElfSectionDescription<IW> &desc)
 	{
 		const u32 prog_headers = header_.b.e_phnum;
 		u32 file_offset = desc.file_offset();
@@ -86,7 +85,7 @@ namespace elf {
 			return false;
 
 		fseek(elf_file, header_.m.e_phoff, SEEK_SET);
-		fread(&program_headers_[0], sizeof(elf32_program_header), prog_headers, elf_file);
+		fread(&program_headers_[0], sizeof(elf_program_header<IW>), prog_headers, elf_file);
 
 		fclose(elf_file);
 
@@ -115,7 +114,7 @@ namespace elf {
 			return false;
 
 		fseek(elf_file, header_.m.e_shoff, SEEK_SET);
-		fread(&section_headers_[0], sizeof(elf32_section_header), sect_headers, elf_file);
+		fread(&section_headers_[0], sizeof(elf_section_header<IW>), sect_headers, elf_file);
 
 		u32 str_tab_count = 0;
 		u32 section_count = 0;
@@ -156,7 +155,7 @@ namespace elf {
 		section_count = 0;
 
 		if (p_sh_str_tab_) {
-			elf32_section_header* p_strtab_ = NULL;
+			elf_section_header<IW>* p_strtab_ = NULL;
 
 			for (u32 sh = 0; sh < sect_headers; ++sh)
 			{
@@ -302,13 +301,13 @@ namespace elf {
 	}
 
 	template <class IW>
-	std::vector<ElfSectionDescription> &ElfxIW<IW>::section_description()
+	std::vector<ElfSectionDescription<IW>> &ElfxIW<IW>::section_description()
 	{
 		return section_description_;
 	}
 
 	template <class IW>
-	u32 ElfxIW<IW>::entry_address()
+	IW ElfxIW<IW>::entry_address()
 	{
 		return p_m_->e_entry;
 	}
