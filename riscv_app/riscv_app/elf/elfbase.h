@@ -169,13 +169,13 @@ namespace elf {
 
     section_type sh_type;		/* Identifies the type of this header.*/
 
-    u32 sh_flags;				    /* Identifies the attributes of the section.*/
+    T sh_flags;				    /* Identifies the attributes of the section.*/
 
     T sh_addr; 				    /* Virtual address of the section in memory, for sections that are loaded.*/
 
-    u32 sh_offset;				  /* Offset of the section in the file image. */
+    T sh_offset;				  /* Offset of the section in the file image. */
 
-    u32 sh_size;				    /* Size in bytes of the section in the file image.May be 0. */
+    T sh_size;				    /* Size in bytes of the section in the file image.May be 0. */
 
     u32 sh_link;				    /* Contains the section index of an associated section.This field is used for several
                             purposes, depending on the type of section.*/
@@ -183,9 +183,9 @@ namespace elf {
     u32 sh_info;				    /* Contains extra information about the section.This field is used for several purposes,
                             depending on the type of section.*/
 
-    u32 sh_addralign;			  /* Contains the required alignment of the section.This field must be a power of two. */
+    T sh_addralign;			  /* Contains the required alignment of the section.This field must be a power of two. */
 
-    u32 sh_entsize;				  /* Contains the size, in bytes, of each entry, for sections that contain fixed - size
+    T sh_entsize;				  /* Contains the size, in bytes, of each entry, for sections that contain fixed - size
                             entries.Otherwise, this field contains zero. */
   };
 

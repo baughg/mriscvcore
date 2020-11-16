@@ -72,7 +72,7 @@ namespace elf {
 	{
 		const u32 prog_headers = header_.b.e_phnum;
 
-		if (!prog_headers || header_.t.ei_class != ELF32)
+		if (!prog_headers || header_.t.ei_class != ei_class_)
 			return false;
 
 		program_headers_.resize(prog_headers);
@@ -95,13 +95,13 @@ namespace elf {
 	template <class IW>
 	bool ElfxIW<IW>::get_section_header()
 	{
-		p_symbol_section_ = NULL;
-		p_sh_str_tab_ = NULL;
-		p_sh_symstr_tab_ = NULL;
+		p_symbol_section_ = nullptr;
+		p_sh_str_tab_ = nullptr;
+		p_sh_symstr_tab_ = nullptr;
 
-		const u32 sect_headers = header_.b.e_shnum;
+		const u32 sect_headers{ header_.b.e_shnum };
 
-		if (!sect_headers || header_.t.ei_class != ELF32)
+		if (!sect_headers || header_.t.ei_class != ei_class_)
 			return false;
 
 		section_headers_.resize(sect_headers);

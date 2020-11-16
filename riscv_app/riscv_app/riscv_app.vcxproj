@@ -100,6 +100,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>elf/;common/</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,11 +152,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="common\defs.cpp" />
-    <ClCompile Include="common\elf_section.cpp" />
     <ClCompile Include="common\m2_model.cpp" />
     <ClCompile Include="elf\elfbase.cpp" />
-    <ClCompile Include="elf\elf_section_description.cpp" />
-    <ClCompile Include="elf\elf_string_table.cpp" />
     <ClCompile Include="memory\flat_memory.cpp" />
     <ClCompile Include="memory\memory_model.cpp" />
     <ClCompile Include="riscv_app.cpp" />

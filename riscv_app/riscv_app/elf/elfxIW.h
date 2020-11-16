@@ -46,7 +46,6 @@ namespace elf {
 		elf_header_middle_common64 m;
 		elf_header_bottom_common b;
 	}elf64_header;
-#pragma pack(pop)
 
 	// PT_LOOS to PT_HIOS (PT_LOPROC to PT_HIPROC) is an inclusive reserved ranges for 
 	// operating system (processor) specific semantics.
@@ -59,25 +58,49 @@ namespace elf {
 		PT_SHLIB,
 		PT_PHDR,
 		PT_LOOS = 0x60000000,
-		PT_HIOS = 0x6FFFFFFF,
+		PT_GNU_EH_FRAME = 0x6474e550,
+		PT_HIOS = 0x6FFFFFFF,		
 		PT_LOPROC = 0x70000000,
 		PT_HIPROC = 0x7FFFFFFF
 	}program_type;
 
+	
 	template <typename T>
-	struct elf_program_header
+	struct elf_program_header32
 	{
 		program_type p_type;	/* Identifies the type of the segment.*/
-		u32 p_offset;			/* Offset of the segment in the file image.*/
+		T p_offset;			/* Offset of the segment in the file image.*/
 		T p_vaddr;			/* Virtual address of the segment in memory.*/
 		T p_paddr;			/* On systems where physical address is relevant, reserved for segment's physical address.*/
-		u32 p_filesz;			/* Size in bytes of the segment in the file image.May be 0.*/
-		u32 p_memsz;			/* Size in bytes of the segment in memory.May be 0.*/
+		T p_filesz;			/* Size in bytes of the segment in the file image.May be 0.*/
+		T p_memsz;			/* Size in bytes of the segment in memory.May be 0.*/
+		//if constexpr (sizeof(T) == sizeof(uint32_t)) {
 		u32 p_flags;			/* Segment - dependent flags.*/
-		u32 p_align;			/* 0 and 1 specify no alignment.Otherwise should be a positive, integral power of 2, with
+		T p_align;			/* 0 and 1 specify no alignment.Otherwise should be a positive, integral power of 2, with
 								p_vaddr equating p_offset modulus p_align.*/
 	};
 
+	template <typename T>
+	struct elf_program_header64
+	{
+		program_type p_type;	/* Identifies the type of the segment.*/
+		u32 p_flags;			/* Segment - dependent flags.*/
+		T p_offset;			/* Offset of the segment in the file image.*/
+		T p_vaddr;			/* Virtual address of the segment in memory.*/
+		T p_paddr;			/* On systems where physical address is relevant, reserved for segment's physical address.*/
+		T p_filesz;			/* Size in bytes of the segment in the file image.May be 0.*/
+		T p_memsz;			/* Size in bytes of the segment in memory.May be 0.*/		
+		T p_align;			/* 0 and 1 specify no alignment.Otherwise should be a positive, integral power of 2, with
+								p_vaddr equating p_offset modulus p_align.*/
+	};
+
+	template<typename IW>
+	union elf_program_header {
+		elf_program_header32<IW> ph32;
+		elf_program_header64<IW> ph64;
+	};
+
+#pragma pack(pop)
 #define IS_C_PLUS_PLUS 1
 
 	typedef struct function

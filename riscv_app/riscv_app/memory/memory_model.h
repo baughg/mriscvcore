@@ -12,8 +12,8 @@ public:
   bool load(const std::string &filename);
 private:
   std::vector<uint32_t> memory_;
-  uint32_t start_address_;
-  uint32_t end_address_;
-  uint32_t entry_address_;
+  uint64_t start_address_;
+  uint64_t end_address_;
+  uint64_t entry_address_;
 };
 #endif

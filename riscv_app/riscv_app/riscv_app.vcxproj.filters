@@ -44,12 +44,6 @@
     <ClCompile Include="riscv_app.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="elf\elf_section_description.cpp">
-      <Filter>elf</Filter>
-    </ClCompile>
-    <ClCompile Include="elf\elf_string_table.cpp">
-      <Filter>elf</Filter>
-    </ClCompile>
     <ClCompile Include="elf\elfbase.cpp">
       <Filter>elf</Filter>
     </ClCompile>
@@ -57,9 +51,6 @@
       <Filter>common</Filter>
     </ClCompile>
     <ClCompile Include="common\m2_model.cpp">
-      <Filter>common</Filter>
-    </ClCompile>
-    <ClCompile Include="common\elf_section.cpp">
       <Filter>common</Filter>
     </ClCompile>
     <ClCompile Include="memory\flat_memory.cpp">
