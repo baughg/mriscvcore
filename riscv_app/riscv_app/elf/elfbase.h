@@ -119,7 +119,7 @@ namespace elf {
                         contains the section names.*/
   }elf_header_bottom_common;
 
-#pragma pack(pop)
+
 
 
   typedef enum
@@ -189,15 +189,32 @@ namespace elf {
                             entries.Otherwise, this field contains zero. */
   };
 
-  typedef struct {
+  template <typename T>
+  struct Elf32_symbol {
     u32 st_name;
-    u32 st_value;
-    u32 st_size;
+    T st_value;
+    T st_size;
     u8 st_info;
     u8 st_other;
     u16 st_shndx;
-  } elf32_symbol;
+  };
 
+  template <typename T>
+  struct elf64_symbol {
+	  u32 st_name; /* Symbol name */
+	  u8 st_info; /* Type and Binding attributes */
+	  u8 st_other;  /* Reserved */
+	  u16 st_shndx;  /* Section table index */
+	  T st_value; /* Symbol value */
+	  T st_size;  /* Size of object (e.g., common) */	  
+  };
+
+  template <typename T>
+  union elf_symbol {
+	  Elf32_symbol<T> sym32;
+	  elf64_symbol<T> sym64;
+  };
+#pragma pack(pop)
   typedef enum {
     STT_NOTYPE,               /* The symbol type is not specified*/
 
@@ -251,8 +268,8 @@ namespace elf {
     STB_LOPROC,         /* Values in this inclusive range are reserved for processor-specific semantics.*/
     STB_HIPROC = 15
   }bind_type;
-
-  typedef struct symbol_description {
+  template <typename IW>
+  struct symbol_description {
     symbol_description()
     {
       save_operation = false;
@@ -265,8 +282,8 @@ namespace elf {
     symbol_type type;
     bind_type binding;
     bool save_operation;
-    elf32_symbol* p_symbol;
-  }symbol_description;
+	elf_symbol<IW>* p_symbol{};
+  };
 
   class ElfBase
   {

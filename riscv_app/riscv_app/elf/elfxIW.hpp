@@ -227,13 +227,13 @@ namespace elf {
 			return false;
 
 		u32 section_size = p_symbol_section_->file_size();
-		u32 symbols = section_size / sizeof(elf32_symbol);
+		u32 symbols = section_size / sizeof(elf_symbol<IW>);
 
 		symbols_.resize(symbols);
 		symbol_descriptions_.resize(symbols);
 
 		fseek(elf_file, p_symbol_section_->file_offset(), SEEK_SET);
-		fread(&symbols_[0], sizeof(elf32_symbol), symbols, elf_file);
+		fread(&symbols_[0], sizeof(elf_symbol<IW>), symbols, elf_file);
 		fclose(elf_file);
 		u32 st_info = 0;
 		const u32 section_count = (u32)section_description_.size();
@@ -245,21 +245,38 @@ namespace elf {
 
 		for (u32 sym = 0; sym < symbols; ++sym)
 		{
-			st_info = symbols_[sym].st_info;
+			if constexpr (sizeof(IW) == sizeof(uint64_t)) {
+				st_info = symbols_[sym].sym64.st_info;
+				sym_name = p_sh_symstr_tab_->get_string(symbols_[sym].sym64.st_name);
+			}
+			else {
+				st_info = symbols_[sym].sym32.st_info;
+				sym_name = p_sh_symstr_tab_->get_string(symbols_[sym].sym32.st_name);
+			}
+			
 			symbol_descriptions_[sym].type = (symbol_type)(st_info & 0xf);
 			st_info >>= 4;
 			symbol_descriptions_[sym].binding = (bind_type)st_info;
 			symbol_descriptions_[sym].p_symbol = &symbols_[sym];
 
-			sym_name = p_sh_symstr_tab_->get_string(symbols_[sym].st_name);
+			
 
 			sec_name = "none";
 			get_section = false;
 
-			if (symbols_[sym].st_shndx < section_count)
-			{
-				sec_name = section_description_[symbols_[sym].st_shndx].section_name();
-				get_section = true;
+			if constexpr (sizeof(IW) == sizeof(uint64_t)) {
+				if (symbols_[sym].sym64.st_shndx < section_count)
+				{
+					sec_name = section_description_[symbols_[sym].sym64.st_shndx].section_name();
+					get_section = true;
+				}
+			}
+			else {
+				if (symbols_[sym].sym32.st_shndx < section_count)
+				{
+					sec_name = section_description_[symbols_[sym].sym32.st_shndx].section_name();
+					get_section = true;
+				}
 			}
 
 			switch (symbol_descriptions_[sym].type)
@@ -295,7 +312,7 @@ namespace elf {
 	}
 
 	template <class IW>
-	std::deque<symbol_description*> & ElfxIW<IW>::get_lookup_symbols()
+	std::deque<symbol_description<IW>*> & ElfxIW<IW>::get_lookup_symbols()
 	{
 		return lookup_symbol_descriptions_;
 	}

@@ -140,7 +140,7 @@ namespace elf {
 		std::vector<ElfSectionDescription<IW>> &section_description();
 		bool cmx_dma_section(IW &addr, u32 &size);
 		void lookup_symbol(std::string variable);
-		std::deque<symbol_description*> &get_lookup_symbols();
+		std::deque<symbol_description<IW>*> &get_lookup_symbols();
 		bool load_section(const IW &address, u32 &load_size, elf::ElfSectionDescription<IW> &desc);
 	private:
 		const u8 ei_class_{ sizeof(IW) == sizeof(uint32_t) ?
@@ -156,10 +156,10 @@ namespace elf {
 		std::vector<ElfSectionDescription<IW>> section_description_;
 		ElfSectionDescription<IW>* p_symbol_section_{};
 		ElfSectionDescription<IW>* p_cmx_dma_section_{};
-		std::vector<elf32_symbol> symbols_;
-		std::vector<symbol_description> symbol_descriptions_;
+		std::vector<elf_symbol<IW>> symbols_;
+		std::vector<symbol_description<IW>> symbol_descriptions_;
 		std::deque<std::string> lookup_symbols_;
-		std::deque<symbol_description*> lookup_symbol_descriptions_;
+		std::deque<symbol_description<IW>*> lookup_symbol_descriptions_;
 	};
 }
 
